@@ -461,6 +461,8 @@ class PagesRequest extends Wire {
 				$this->setResponseCode(403, 'Authenticated user lacks access');
 			} else {
 				$this->setResponseCode(401, 'User must login for access');
+				// Add this line to log the unauthorized access attempt
+                                wire('log')->save('session', "$user->name blocked from accessing $page->title");
 			}
 		}
 
